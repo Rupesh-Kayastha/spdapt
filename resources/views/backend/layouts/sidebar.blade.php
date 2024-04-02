@@ -1,8 +1,11 @@
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
     <!-- Sidebar - Brand -->
     <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ route('admin') }}">
-        <div class="sidebar-brand-text mx-3"><img
-                src="https://morshgolf.com/wp-content/uploads/2020/01/morsh-golf-logo-est.png" style="width:100%;"></div>
+        <div class="sidebar-brand-text mx-3">
+          {{-- <img src="https://morshgolf.com/wp-content/uploads/2020/01/morsh-golf-logo-est.png" style="width:100%;"> --}}
+          <h3 style="color: red;">SPDAPT</h3>
+
+        </div>
     </a>
     <!-- Divider -->
     <hr class="sidebar-divider my-0">
@@ -63,8 +66,8 @@
 
     <hr class="sidebar-divider">
     <div class="sidebar-heading">Shop</div>
-{{-- 
-    <li class="nav-item">
+
+    {{-- <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#categoryCollapse"
             aria-expanded="true" aria-controls="categoryCollapse">
             <i class="fas fa-sitemap"></i>
@@ -80,7 +83,7 @@
     </li> --}}
 
     {{-- Products --}}
-    {{-- <li class="nav-item">
+    <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#productCollapse"
             aria-expanded="true" aria-controls="productCollapse">
             <i class="fas fa-cubes"></i>
@@ -92,19 +95,19 @@
                 <a class="collapse-item" href="{{ route('product.index') }}">Products</a>
                 <a class="collapse-item" href="{{ route('product.create') }}">Add Product</a>
                 <a class="collapse-item" href="{{ route('productcont') }}">Manage Product Content</a>
-                <a class="collapse-item" href="{{route('pricing_rules.index')}}">Pricing Rule</a>
+                {{-- <a class="collapse-item" href="{{route('pricing_rules.index')}}">Pricing Rule</a> --}}
             </div>
         </div>
-    </li> --}}
+    </li>
 
-    <li class="nav-item">
+    {{-- <li class="nav-item">
         <a class="nav-link" href="{{ route('flex_attribute.index') }}">
             <i class="fas fa-comments"></i>
             <span>Flex Attribute</span></a>
-    </li>
+    </li> --}}
 
     {{-- Shipping --}}
-    <li class="nav-item">
+    {{-- <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#shippingCollapse"
             aria-expanded="true" aria-controls="shippingCollapse">
             <i class="fas fa-truck"></i>
@@ -113,14 +116,14 @@
         <div id="shippingCollapse" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Shipping Options:</h6>
-                {{-- <a class="collapse-item" href="{{route('shipping.index')}}">Shipping</a>
-        <a class="collapse-item" href="{{route('shipping.create')}}">Add Shipping</a> --}}
+                <a class="collapse-item" href="{{route('shipping.index')}}">Shipping</a>
+        <a class="collapse-item" href="{{route('shipping.create')}}">Add Shipping</a>
                 <a class="collapse-item" href="{{ route('country.index') }}"> Shipping Management</a>
                 <a class="collapse-item" href="{{ route('country.create') }}"> Add Shipping</a>
-                {{-- <a class="collapse-item" href="{{route('state.index')}}"> State</a> --}}
+                <a class="collapse-item" href="{{route('state.index')}}"> State</a>
             </div>
         </div>
-    </li>
+    </li> --}}
 
     <!--Orders -->
     <li class="nav-item">
@@ -130,22 +133,22 @@
         </a>
     </li>
     <!-- Abonded Cart -->
-    <li class="nav-item">
+    {{-- <li class="nav-item">
         <a class="nav-link" href="{{ route('abondedcart.index') }}">
             <i class="fas fa-cart-arrow-down fa-chart-area"></i>
             <span>Abonded Cart</span>
         </a>
-    </li>
+    </li> --}}
     <!-- Reviews -->
-    <li class="nav-item">
+    {{-- <li class="nav-item">
         <a class="nav-link" href="{{ route('review.index') }}">
             <i class="fas fa-comments"></i>
             <span>Reviews</span></a>
-    </li>
+    </li> --}}
 
 
     <!-- Divider -->
-    <div class="sidebar-heading">
+    {{-- <div class="sidebar-heading">
         Blog Posts
     </div>
 
@@ -162,9 +165,9 @@
                 <a class="collapse-item" href="{{ route('post.create') }}">Add Post</a>
             </div>
         </div>
-    </li>
+    </li> --}}
 
-
+{{-- 
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#postCategoryCollapse"
             aria-expanded="true" aria-controls="postCategoryCollapse">
@@ -179,10 +182,10 @@
                 <a class="collapse-item" href="{{ route('post-category.create') }}">Add Category</a>
             </div>
         </div>
-    </li>
+    </li> --}}
 
     <!-- Tags -->
-    <li class="nav-item">
+    {{-- <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#tagCollapse"
             aria-expanded="true" aria-controls="tagCollapse">
             <i class="fas fa-tags fa-folder"></i>
@@ -195,23 +198,23 @@
                 <a class="collapse-item" href="{{ route('post-tag.create') }}">Add Tag</a>
             </div>
         </div>
-    </li>
+    </li> --}}
 
     <!-- Comments -->
-    <li class="nav-item">
+    {{-- <li class="nav-item">
         <a class="nav-link" href="{{ route('comment.index') }}">
             <i class="fas fa-comments fa-chart-area"></i>
             <span>Comments</span>
         </a>
-    </li>
+    </li> --}}
 
-    <li class="nav-item">
+    {{-- <li class="nav-item">
         <a class="nav-link" href="{{ route('coupon.index') }}">
             <i class="fas fa-table"></i>
             <span>Coupon</span></a>
-    </li>
+    </li> --}}
 
-    <hr class="sidebar-divider">
+    {{-- <hr class="sidebar-divider"> --}}
     <!-- General settings -->
 
     <div class="sidebar-heading">Users</div>
@@ -222,10 +225,10 @@
             <span>Users</span></a>
     </li>
 
-    <hr class="sidebar-divider">
+    {{-- <hr class="sidebar-divider"> --}}
     <!-- General settings -->
 
-    <div class="sidebar-heading">General Settings</div>
+    {{-- <div class="sidebar-heading">General Settings</div>
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#brandCollapse"
             aria-expanded="true" aria-controls="brandCollapse">
@@ -239,9 +242,9 @@
                 <a class="collapse-item" href="{{ route('brand.create') }}">Add Gallery</a>
             </div>
         </div>
-    </li>
+    </li> --}}
 
-    <li class="nav-item">
+    {{-- <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwoo"
             aria-expanded="true" aria-controls="collapseTwoo">
             <i class="fas fa-cog"></i>
@@ -256,9 +259,9 @@
                 <a class="collapse-item" href="{{ route('menus') }}">Menus</a>
             </div>
         </div>
-    </li>
+    </li> --}}
     <!-- Sidebar Toggler (Sidebar) -->
-    <div class="text-center d-none d-md-inline">
+    {{-- <div class="text-center d-none d-md-inline">
         <button class="rounded-circle border-0" id="sidebarToggle"></button>
-    </div>
+    </div> --}}
 </ul>

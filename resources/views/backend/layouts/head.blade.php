@@ -7,7 +7,7 @@
     <meta name="author" content="">
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>Morsh Golf || DASHBOARD</title>
+    <title>SPDAPT</title>
   
     <!-- Custom fonts for this template-->
     <link href="{{asset('backend/vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
