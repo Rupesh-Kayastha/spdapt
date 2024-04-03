@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\User;
+use App\Models\Transaction;
 
-class RechargeController extends Controller
+class TransactionController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,7 +15,8 @@ class RechargeController extends Controller
      */
     public function index()
     {
-        //
+        $transactions = Transaction::where('status',"0")->with('user_info')->get();
+        return view('backend.recharge.index', compact('transactions'));
     }
 
     /**
@@ -80,5 +83,25 @@ class RechargeController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function approve(Request $request, $id)
+    {
+        $transaction = Transaction::findOrFail($id);
+
+        $transaction->status = "1";
+        $transaction->save();
+
+        return redirect()->back()->with('success', 'Transaction approved successfully.');
+    }
+
+    public function reject($id)
+    {
+        $transaction = Transaction::find($id);
+        $transaction->status = "2"; // Assuming '2' represents rejected status
+        // dd( $transaction);
+        $transaction->save();
+
+        return redirect()->back()->with('success', 'Transaction rejected successfully.');
     }
 }

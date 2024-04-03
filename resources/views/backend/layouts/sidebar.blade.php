@@ -132,6 +132,12 @@
             <span>Orders</span>
         </a>
     </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route('transaction.index') }}">
+            <i class="fas fa-comments fa-chart-area"></i>
+            <span>Recharge</span>
+        </a>
+    </li>
     <!-- Abonded Cart -->
     {{-- <li class="nav-item">
         <a class="nav-link" href="{{ route('abondedcart.index') }}">

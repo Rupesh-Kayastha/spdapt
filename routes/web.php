@@ -316,6 +316,11 @@ Route::group(['prefix'=>'/admin','middleware'=>['auth','admin']],function(){
     // Abonded Cart 
     Route::get('abondedcart', 'CartController@abondedcart')->name('abondedcart.index');
 
+    //Recharge 
+    Route::resource('/transaction','TransactionController');
+    Route::post('/transactions/{id}/approve', 'TransactionController@approve')->name('transactions.approve');
+    Route::post('/transactions/{id}/reject', 'TransactionController@reject')->name('transactions.reject'); 
+
 
 });
 

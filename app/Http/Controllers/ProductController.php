@@ -29,8 +29,7 @@ class ProductController extends Controller
         $faq=Faq::where('status','active')->orderBy('title','ASC')->get();
         $products = Product::getAllProduct();
         return view('backend.product.index')->with('products',$products)
-
-                                            ->with('faq_lists ',$faq);
+        ->with('faq_lists ',$faq);
     }
 
     /**
