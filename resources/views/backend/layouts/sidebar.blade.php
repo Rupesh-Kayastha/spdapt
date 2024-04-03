@@ -94,7 +94,7 @@
                 <h6 class="collapse-header">Product Options:</h6>
                 <a class="collapse-item" href="{{ route('product.index') }}">Products</a>
                 <a class="collapse-item" href="{{ route('product.create') }}">Add Product</a>
-                <a class="collapse-item" href="{{ route('productcont') }}">Manage Product Content</a>
+                {{-- <a class="collapse-item" href="{{ route('productcont') }}">Manage Product Content</a> --}}
                 {{-- <a class="collapse-item" href="{{route('pricing_rules.index')}}">Pricing Rule</a> --}}
             </div>
         </div>

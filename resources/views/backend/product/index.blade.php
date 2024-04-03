@@ -20,10 +20,7 @@
               <th>S.N.</th>
               <th>Photo</th>
               <th>Title</th>
-              <th>Category</th>
               <th>Price</th>
-              <th>Size</th>
-              <th>Stock</th>
               <th>Status</th>
               <th>Action</th>
             </tr>
@@ -33,10 +30,7 @@
               <th>S.N.</th>
               <th>Photo</th>
               <th>Title</th>
-              <th>Category</th>
               <th>Price</th>
-              <th>Size</th>
-              <th>Stock</th>
               <th>Status</th>
               <th>Action</th>
             </tr>
@@ -75,18 +69,8 @@
                           {{$product->sub_cat_info->title ?? ''}}
                       </sub>
                     </td>
-                    <td>{{(($product->is_featured==1)? 'Yes': 'No')}}</td>
-                    <td>${{number_format($product->price,2)}}/-</td>
-                    {{-- <td>{{$product->discount}}% OFF</td> --}}
-                    <td>{{$product->size}}</td>
-                    {{-- <td>{{ isset(($product->brand->title)) ? ucfirst($product->brand->title) : " " }}</td> --}}
-                    <td>
-                      @if($product->stock>0)
-                      <span class="badge badge-primary">{{$product->stock}}</span>
-                      @else
-                      <span class="badge badge-danger">{{$product->stock}}</span>
-                      @endif
-                    </td>
+                    <td>{{number_format($product->price,2)}}/-</td>
+                    
                     <td>
                         @if($product->status=='active')
                             <span class="badge badge-success">{{$product->status}}</span>
@@ -95,14 +79,13 @@
                         @endif
                     </td>
                     <td>
-                    <a href="{{url('/')}}/shop/{{$product->slug}}" title="view" target="_blank"><i class="fas fa-eye" style="width:20px"></i></a>
                     
                         <a href="{{route('product.edit',$product->id)}}" title="edit" data-placement="bottom"><i style="width:20px" class="fas fa-edit"></i></a>
                         
                     <form method="POST" id="delete_form" action="{{route('product.destroy',[$product->id])}}" onsubmit="confirm_to_delete()">
                       @csrf
                       @method('delete')
-                          <button class="btn btn-danger btn-sm dltBtn" data-id={{$product->id}} style="height:30px; width:30px;border-radius:50%" data-toggle="tooltip" data-placement="bottom" title="Delete"><i class="fas fa-trash-alt"></i></button>
+                          <button class="btn btn-danger btn-sm dltBtn" data-id={{$product->id}} style="height:30px; width:30px;border-radius:50%; margin-left: 30px;" data-toggle="tooltip" data-placement="bottom" title="Delete"><i class="fas fa-trash-alt"></i></button>
                         </form>
                     </td>
                 </tr>

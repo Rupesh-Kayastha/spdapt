@@ -26,8 +26,12 @@
                     @error('name') <span class="text-danger">{{$message}}</span> @enderror </div>
                 <div class="form-group full-width-f-g">
                     <label>Email<span>*</span></label>
-                    <input type="text" name="email" placeholder="" required="required" class="form-control" value="{{old('email')}}">
+                    <input type="email" name="email" placeholder="" required="required" class="form-control" value="{{old('email')}}">
                     @error('email') <span class="text-danger">{{$message}}</span> @enderror </div>
+                <div class="form-group full-width-f-g">
+                    <label>Phone Number<span>*</span></label>
+                    <input type="text" name="phone_no" placeholder="" required="required" class="form-control" value="{{old('phone_no')}}">
+                    @error('phone_no') <span class="text-danger">{{$message}}</span> @enderror </div>
                 <div class="form-group full-width-f-g">
                     <label> Password<span>*</span></label>
                     <input type="password" name="password" placeholder="" required="required" class="form-control" value="{{old('password')}}">

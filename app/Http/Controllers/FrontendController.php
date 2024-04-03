@@ -408,8 +408,6 @@ class FrontendController extends Controller
                 }
             }
         }
-        // return $tagURL;
-        // return $catURL;
         return redirect()->route('blog', $catURL . $tagURL);
     }
 
@@ -463,7 +461,6 @@ class FrontendController extends Controller
     public function logout(){
         Session::forget('user');
         Auth::logout();
-        //request()->session()->flash('success','Logout successfully');
         return redirect()->route('home');
     }
 
@@ -481,18 +478,18 @@ class FrontendController extends Controller
 
         ]);
         $data = $request->all();
-        // dd($data);
         $check = $this->create($data);
         Session::put('user', $data['email']);
         $datais = [
             'name' => $request->name,
             'to' => $request->email,
-            'subject' => "Sign up successful. On " . date('Y-m-d H:i:sA') . " || Morshgolf"
+            'number' => $request->phone_no,
+            'subject' => "Sign up successful. On " . date('Y-m-d H:i:sA') . " || spdapt"
         ];
-        Mail::send('mail.signup',$datais, function($messages) use ($datais){
-            $messages->to($datais['to']);
-            $messages->subject($datais['subject']);
-        });
+        // Mail::send('mail.signup',$datais, function($messages) use ($datais){
+        //     $messages->to($datais['to']);
+        //     $messages->subject($datais['subject']);
+        // });
 
         if ($check) {
             request()->session()->flash('success', 'Successfully registered');
@@ -507,6 +504,7 @@ class FrontendController extends Controller
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
+            'phone_no' => $data['phone_no'],
             'password' => Hash::make($data['password']),
             'status' => 'active'
         ]);
