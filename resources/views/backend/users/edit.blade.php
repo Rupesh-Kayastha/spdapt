@@ -24,7 +24,14 @@
                         <span class="text-danger">{{ $message }}</span>
                     @enderror
                 </div>
-
+                <div class="form-group">
+                    <label for="inputPhoneno" class="col-form-label">Phone No</label>
+                    <input id="inputPhoneno" type="number" name="phone_no" placeholder="Enter email"
+                        value="{{ $user->phone_no }}" class="form-control" readonly>
+                    @error('phone_no')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
+                </div>
                 {{-- <div class="form-group">
             <label for="inputPassword" class="col-form-label">Password</label>
           <input id="inputPassword" type="password" name="password" placeholder="Enter password"  value="{{$user->password}}" class="form-control">

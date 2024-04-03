@@ -40,7 +40,7 @@ class UsersController extends Controller
             'password'=>'string|required',
             'role'=>'required|in:admin,user',
             'status'=>'required|in:active,inactive',
-            'photo'=>'nullable|string',
+            'phone_no'=>'nullable|string|max:10',
         ]);
         // dd($request->all());
         $data=$request->all();
@@ -94,7 +94,7 @@ class UsersController extends Controller
             'email'=>'string|required',
             'role'=>'required|in:admin,user',
             'status'=>'required|in:active,inactive',
-            'photo'=>'nullable|string',
+            'phone_no'=>'nullable|string|max:10',
         ]);
         // dd($request->all());
         $data=$request->all();
