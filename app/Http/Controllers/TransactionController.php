@@ -15,8 +15,26 @@ class TransactionController extends Controller
      */
     public function index()
     {
-        $transactions = Transaction::where('status',"0")->with('user_info')->get();
-        return view('backend.recharge.index', compact('transactions'));
+        $transactions = Transaction::where(['status'=>"0", 'type'=>"CR"])->with('user_info')->get();
+        return view('backend.recharge.index')->with('transactions',$transactions);
+    }
+
+    public function rechargeapprove(Request $request)
+    {
+        $transactions = Transaction::where(['status'=>"1", 'type'=>"CR"])->with('user_info')->get();
+        return view('backend.recharge.rechargeapprove')->with('transactions',$transactions);
+    }
+
+    public function withdrawal()
+    {
+        $transactions = Transaction::where(['status'=>"0", 'type'=>"DR"])->with('user_info')->get();
+        return view('backend.recharge.withdrawal')->with('transactions',$transactions);
+    }
+
+    public function withdrawalapprove(Request $request)
+    {
+        $transactions = Transaction::where(['status'=>"1", 'type'=>"DR"])->with('user_info')->get();
+        return view('backend.recharge.withdrawalapprove')->with('transactions',$transactions);
     }
 
     /**
@@ -98,8 +116,7 @@ class TransactionController extends Controller
     public function reject($id)
     {
         $transaction = Transaction::find($id);
-        $transaction->status = "2"; // Assuming '2' represents rejected status
-        // dd( $transaction);
+        $transaction->status = "2";
         $transaction->save();
 
         return redirect()->back()->with('success', 'Transaction rejected successfully.');

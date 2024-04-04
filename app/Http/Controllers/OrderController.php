@@ -9,7 +9,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Cart;
 use App\Models\Order;
-use App\Models\Shipping;
 use App\Models\Country;
 use App\User;
 use PDF;
@@ -36,7 +35,7 @@ class OrderController extends Controller
      */
 
     public function index(){
-        $orders=Order::orderBy('id','DESC')->paginate(10);
+        $orders=Order::with('product')->orderBy('id','DESC')->paginate(10);
         return view('backend.order.index')->with('orders',$orders);
     }
 

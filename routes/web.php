@@ -318,9 +318,12 @@ Route::group(['prefix'=>'/admin','middleware'=>['auth','admin']],function(){
 
     //Recharge 
     Route::resource('/transaction','TransactionController');
+    Route::get('/rechargeapprove', 'TransactionController@rechargeapprove')->name('transaction.rechargeapprove');
     Route::post('/transactions/{id}/approve', 'TransactionController@approve')->name('transactions.approve');
     Route::post('/transactions/{id}/reject', 'TransactionController@reject')->name('transactions.reject'); 
 
+    Route::get('/withdrawal', 'TransactionController@withdrawal')->name('transaction.withdrawal');
+    Route::get('/withdrawalapprove', 'TransactionController@withdrawalapprove')->name('transaction.withdrawalapprove');
 
 });
 

@@ -3,7 +3,7 @@
     <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ route('admin') }}">
         <div class="sidebar-brand-text mx-3">
           {{-- <img src="https://morshgolf.com/wp-content/uploads/2020/01/morsh-golf-logo-est.png" style="width:100%;"> --}}
-          <h3 style="color: red;">SPDAPT</h3>
+          <h3 style="color: rgb(249, 250, 250);">SPDAPT</h3>
 
         </div>
     </a>
@@ -42,7 +42,7 @@
             <span>Media Manager</span></a>
     </li> -->
     <!-- Divider -->
-    <hr class="sidebar-divider">
+    {{-- <hr class="sidebar-divider"> --}}
     <!-- Heading -->
 
     {{-- <li class="nav-item">
@@ -94,11 +94,50 @@
                 <h6 class="collapse-header">Product Options:</h6>
                 <a class="collapse-item" href="{{ route('product.index') }}">Products</a>
                 <a class="collapse-item" href="{{ route('product.create') }}">Add Product</a>
-                <a class="collapse-item" href="{{ route('productcont') }}">Manage Product Content</a>
+                {{-- <a class="collapse-item" href="{{ route('productcont') }}">Manage Product Content</a> --}}
                 {{-- <a class="collapse-item" href="{{route('pricing_rules.index')}}">Pricing Rule</a> --}}
             </div>
         </div>
     </li>
+
+    <!--Orders -->
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route('order.index') }}">
+            <i class="fas fa-truck"></i>
+            <span>Orders</span>
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#rechargeCollapse"
+            aria-expanded="true" aria-controls="shippingCollapse">
+            <i class="fas fa-hammer fa-chart-area"></i>
+            <span>Recharge</span>
+        </a>
+        <div id="rechargeCollapse" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Recharge Options:</h6>
+                <a class="collapse-item" href="{{ route('transaction.index') }}">Pending Recharge</a>
+                <a class="collapse-item" href="{{ route('transaction.rechargeapprove') }}">Approve Recharge</a>
+            </div>
+        </div>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#withdrawalCollapse"
+            aria-expanded="true" aria-controls="shippingCollapse">
+            <i class="fas fa-cart-arrow-down fa-chart-area"></i>
+            <span>Withdrawal</span>
+        </a>
+        <div id="withdrawalCollapse" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Withdrawal Options:</h6>
+                <a class="collapse-item" href="{{ route('transaction.withdrawal') }}">Pending Withdrawal</a>
+                <a class="collapse-item" href="{{ route('transaction.withdrawalapprove') }}">Approve Withdrawal</a>
+            </div>
+        </div>
+    </li>
+    <!-- Abonded Cart -->
 
     {{-- <li class="nav-item">
         <a class="nav-link" href="{{ route('flex_attribute.index') }}">
@@ -124,21 +163,6 @@
             </div>
         </div>
     </li> --}}
-
-    <!--Orders -->
-    <li class="nav-item">
-        <a class="nav-link" href="{{ route('order.index') }}">
-            <i class="fas fa-hammer fa-chart-area"></i>
-            <span>Orders</span>
-        </a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="{{ route('transaction.index') }}">
-            <i class="fas fa-comments fa-chart-area"></i>
-            <span>Recharge</span>
-        </a>
-    </li>
-    <!-- Abonded Cart -->
     {{-- <li class="nav-item">
         <a class="nav-link" href="{{ route('abondedcart.index') }}">
             <i class="fas fa-cart-arrow-down fa-chart-area"></i>

@@ -24,6 +24,10 @@ class Order extends Model
         return $this->hasMany(Cart::class);
     }
 
+    public function product(){
+        return $this->belongsTo(Product::class,'product_id');
+    }
+
     public function shipping(){
         return $this->belongsTo(Shipping::class,'shipping_id');
     }
