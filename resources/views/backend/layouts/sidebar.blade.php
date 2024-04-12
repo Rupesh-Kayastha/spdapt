@@ -67,21 +67,6 @@
     <hr class="sidebar-divider">
     <div class="sidebar-heading">Shop</div>
 
-    {{-- <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#categoryCollapse"
-            aria-expanded="true" aria-controls="categoryCollapse">
-            <i class="fas fa-sitemap"></i>
-            <span>Category</span>
-        </a>
-        <div id="categoryCollapse" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Category Options:</h6>
-                <a class="collapse-item" href="{{ route('category.index') }}">Category</a>
-                <a class="collapse-item" href="{{ route('category.create') }}">Add Category</a>
-            </div>
-        </div>
-    </li> --}}
-
     {{-- Products --}}
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#productCollapse"
@@ -94,8 +79,6 @@
                 <h6 class="collapse-header">Product Options:</h6>
                 <a class="collapse-item" href="{{ route('product.index') }}">Products</a>
                 <a class="collapse-item" href="{{ route('product.create') }}">Add Product</a>
-                {{-- <a class="collapse-item" href="{{ route('productcont') }}">Manage Product Content</a> --}}
-                {{-- <a class="collapse-item" href="{{route('pricing_rules.index')}}">Pricing Rule</a> --}}
             </div>
         </div>
     </li>
@@ -253,6 +236,14 @@
         <a class="nav-link" href="{{ route('users.index') }}">
             <i class="fas fa-users"></i>
             <span>Users</span></a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="{{ route('brand.index') }}" data-target="#brandCollapse"
+            aria-expanded="true" aria-controls="brandCollapse">
+            <i class="fas fa-table"></i>
+            <span>Level</span>
+        </a>
     </li>
 
     {{-- <hr class="sidebar-divider"> --}}

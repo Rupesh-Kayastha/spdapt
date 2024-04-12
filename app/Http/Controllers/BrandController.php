@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use App\Models\Brand;
+use App\Models\User;
 use Illuminate\Support\Str;
 class BrandController extends Controller
 {
@@ -14,7 +15,7 @@ class BrandController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(){
-        $brand=Brand::orderBy('id','DESC')->paginate();
+        $brand = Brand::orderBy('id','DESC')->get();
         return view('backend.brand.index')->with('brands',$brand);
     }
 
