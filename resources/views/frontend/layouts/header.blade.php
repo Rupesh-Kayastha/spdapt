@@ -1,9 +1,9 @@
 @php
 $settings=DB::table('settings')->get();
-$productList=DB::table('products')->where('status','active')->orderBy('id', 'desc')->get();
-$menus=DB::table('menu')->where(['status' => 1, 'sub_menu' => 0,])->orderBy('order_by', 'asc')->get();
+// $productList=DB::table('products')->where('status','active')->orderBy('id', 'desc')->get();
+// $menus=DB::table('menu')->where(['status' => 1, 'sub_menu' => 0,])->orderBy('order_by', 'asc')->get();
 
-$currency = session('currency');
+// $currency = session('currency');
 @endphp
 
 <style>
@@ -144,7 +144,7 @@ $currency = session('currency');
         </div>
         <div class="header-menu">
             <ul>
-                @foreach ($menus as $menu)
+                {{-- @foreach ($menus as $menu)
                 @php $submenus = Helper::subMenus($menu->id); @endphp
                 @if ($submenus->isNotEmpty())
                 <li class="product-list"><a href="{{ $menu->url }}">{{ $menu->name }}</a>
@@ -163,15 +163,11 @@ $currency = session('currency');
                 @else
                 <li><a href="{{ $menu->url }}">{{ $menu->name }}</a></li>
                 @endif
-                @endforeach
+                @endforeach --}}
                 {{-- <li>
                     <div class='dropdown'>
                         <div class='select'>
-                            @if($currency != null)
-                            <div class='selected placeholder'>{{ $currency }}</div>
-                            @else
                             <div class='selected placeholder'>USD</div>
-                            @endif
                             <div class='caret'></div>
                         </div>
                         <ul class='menu'>
@@ -191,15 +187,12 @@ $currency = session('currency');
                     </div>
 
                 </li> --}}
-                <li id="translate" class="avijit"></li>
+                {{-- <li id="translate" class="avijit"></li> --}}
 
             </ul>
         </div>
         <div class="header-contact">
             <ul>
-                <li><a href="{{route('cart')}}"><i class="fa-regular fa-cart-shopping"></i>
-                        <div class="cart-num"> @if(Helper::cartCount()>0){{Helper::cartCount()}}@endif </div>
-                    </a></li>
                 <li class="account-login"> <a href="#" class="account-login-link"><i class="fa-regular fa-user"></i></a>
                     <div class="account-popup " style="z-index: 9999;"> @auth
                         @if(Auth::user()->role=='admin')
@@ -224,7 +217,7 @@ $currency = session('currency');
         </div>
     </div>
 </header>
-<div id="translate"></div>
+{{-- <div id="translate"></div> --}}
 <style>
     #translate {
         margin: 0;

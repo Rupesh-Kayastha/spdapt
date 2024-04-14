@@ -39,31 +39,16 @@
                             @foreach ($brands as $brand)
                                 <tr>
                                     <td>{{ $sl }}</td>
-                                    <td>{{ $brand->user_name . ' (' . $brand->user_number . ')' }}</td>
-                                    <td>
-                                        @if ($brand->level1 != 0)
-                                            {{ $brand->level1_name . ' (' . $brand->level1_number . ')' }}
-                                        
-                                        @endif
-                                    </td>
-
-                                    <td>
-                                        @if ($brand->level2 != 0)
-                                            {{ $brand->level2_name . ' (' . $brand->level2_number . ')' }}
-                                        
-                                        @endif
-                                    </td>
-
-                                    <td>
-                                        @if ($brand->level3 != 0)
-                                            {{ $brand->level3_name . ' (' . $brand->level3_number . ')' }}
-                                        
-                                        @endif
-                                    </td>
-                                    {{-- <td>{{ helper::levelUsers($brand->userid) }}</td>
-                                    <td>{{ helper::levelUsers($brand->level1) }}</td>
-                                    <td>{{ helper::levelUsers($brand->level2) }}</td>
-                                    <td>{{ helper::levelUsers($brand->level3) }}</td> --}}
+                                    @php 
+                                        $dataUser = Helper::userData($brand->userid);
+                                        $dataLevel1 = Helper::userData($brand->level1);
+                                        $dataLevel2 = Helper::userData($brand->level2);
+                                        $dataLevel3 = Helper::userData($brand->level3);
+                                    @endphp
+                                    <td>{{ $brand->userid != 0 ? $dataUser->name ." (". $dataUser->phone_no .")" : "" }}</td>
+                                    <td>{{ $brand->level1 != 0 ? $dataLevel1->name ." (". $dataLevel1->phone_no .")" : "" }}</td>
+                                    <td>{{ $brand->level2 != 0 ? $dataLevel2->name ." (". $dataLevel2->phone_no .")" : "" }}</td>
+                                    <td>{{ $brand->level3 != 0 ? $dataLevel3->name ." (". $dataLevel3->phone_no .")" : "" }}</td>
                                 </tr>
                                 @php $sl++; @endphp
                             @endforeach

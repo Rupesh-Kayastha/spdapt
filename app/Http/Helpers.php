@@ -304,6 +304,11 @@ class Helper{
         return (float)$total_price;
     }
 
+    public static function userData($id){
+        $user = DB::table('users')->where('id', $id)->first();
+        return $user;
+    }
+
 }
 
 ?>

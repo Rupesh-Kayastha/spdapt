@@ -13,7 +13,6 @@
   .maincontent {
     width: 100%;
     margin: 0 auto;
-    margin-top: 91px;
   }
 
   ul#accordionSidebar li,
