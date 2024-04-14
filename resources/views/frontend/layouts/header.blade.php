@@ -143,6 +143,7 @@ $settings=DB::table('settings')->get();
                     src="@foreach($settings as $data) {{$data->logo}} @endforeach " class="img-fluid" alt="" /></a>
         </div>
         <div class="header-menu">
+<<<<<<< HEAD
             <ul>
                 {{-- @foreach ($menus as $menu)
                 @php $submenus = Helper::subMenus($menu->id); @endphp
@@ -190,6 +191,9 @@ $settings=DB::table('settings')->get();
                 {{-- <li id="translate" class="avijit"></li> --}}
 
             </ul>
+=======
+            
+>>>>>>> 1784fe48ada07d79c2c1b766c490387f6bb72282
         </div>
         <div class="header-contact">
             <ul>
