@@ -1,9 +1,9 @@
 @php
 $settings=DB::table('settings')->get();
-$productList=DB::table('products')->where('status','active')->orderBy('id', 'desc')->get();
-$menus=DB::table('menu')->where(['status' => 1, 'sub_menu' => 0,])->orderBy('order_by', 'asc')->get();
+// $productList=DB::table('products')->where('status','active')->orderBy('id', 'desc')->get();
+// $menus=DB::table('menu')->where(['status' => 1, 'sub_menu' => 0,])->orderBy('order_by', 'asc')->get();
 
-$currency = session('currency');
+// $currency = session('currency');
 @endphp
 
 <style>
@@ -143,63 +143,10 @@ $currency = session('currency');
                     src="@foreach($settings as $data) {{$data->logo}} @endforeach " class="img-fluid" alt="" /></a>
         </div>
         <div class="header-menu">
-            <ul>
-                @foreach ($menus as $menu)
-                @php $submenus = Helper::subMenus($menu->id); @endphp
-                @if ($submenus->isNotEmpty())
-                <li class="product-list"><a href="{{ $menu->url }}">{{ $menu->name }}</a>
-                    <div class="product-menu">
-                        <div class="product-menu-left">
-                            @foreach ($submenus as $submenu)
-                                <a href="{{ $submenu->url }}"><i class="fa-regular fa-golf-club"></i>{{ $submenu->name }}</a>
-                            @endforeach
-                        </div>
-                        <div class="product-menu-right">
-                            <img src="{{asset('/frontend/images/menu-img.jpg')}}" alt="">
-                        </div>
-                    </div>
-                    <button type="button" class="mob-btn"><i class="fa-regular fa-circle-chevron-down"></i></button>
-                </li>
-                @else
-                <li><a href="{{ $menu->url }}">{{ $menu->name }}</a></li>
-                @endif
-                @endforeach
-                {{-- <li>
-                    <div class='dropdown'>
-                        <div class='select'>
-                            @if($currency != null)
-                            <div class='selected placeholder'>{{ $currency }}</div>
-                            @else
-                            <div class='selected placeholder'>USD</div>
-                            @endif
-                            <div class='caret'></div>
-                        </div>
-                        <ul class='menu'>
-                            <li onclick="setCurrency('USD')"><img
-                                    src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAgBAMAAACm+uYvAAAAD1BMVEUAJWq0vtO1v9PBASv////7AfyZAAAAOUlEQVQoz2NgQALGSIABt4QSHDK4IAEGBkU4RJMg3Q4kS9CMQlhCqR3DxB8uOABuCWMcALfEiLUDADkOhlU5rxL6AAAAAElFTkSuQmCC" />USD
-                            </li>
-                            <li onclick="setCurrency('EUR')"><img
-                                    src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAgAgMAAAApuhOPAAAACVBMVEUAU6eApFP/9ABWIW2TAAAAQ0lEQVQY02NgoD5gdEDisE1AsEXYJojAOZmMDpkIDhjBlIERMbbAbQLZArcJhYOiDA9AsRTFOSgORfECiueIsoVkAACg9AqhFj835AAAAABJRU5ErkJggg==" />EUR
-                            </li>
-                            <li onclick="setCurrency('GBP')"><img
-                                    src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAgCAMAAABjCgsuAAAAyVBMVEUAIH8BIH8CIYAHJoIOLIYPLYYZNYsaNowfO44nQpI3UJo4UJtLYaRhdK9idbBmebJnerJoerN4iLt5ibuQncenstK7w9y8xN29xd3P1ebRDSTe4u7fMh3fNiHgOyfgPCjhQi/hRDHjTjzlW0rlW0vnalvna1vpdWfpdmjpe27qfG/qjYTqj4bqoJnq7PTropvrs7DrtLHrurfrurjr7fTsxcTsxcXu1NXx4ePy8/j06+309fn17e/49PX49Pb7+vv7+/z+/v7///8ZBiYZAAABQklEQVQ4y82U2U4CURBEW3ABRR2VdShkQFTcFUQYQIH6/4/ywbm5KwYeTKzHSarOTU9XC4D+nGkkhsg4jmNSfzmoc/XSAi5fpQ8gGZLVwi+G0jOnNwCuJhQOEg/iGPJl8qMD4GHBhqSc37oQ21BscPEIoDMiy3kp1KghpwHD8YyTHoDrKd9LIiJy5kEMw26FfGsDracV6/vZCzyINhw2+XUPoDvm8iKnx+JAlCF3vuS4C+Duk80jc/BSqBqQSBlqavhkZU8cRQoyIJXhZ/i9CWcn4suEZIaRGn5RQtqJUs77ABJl0MO39iak7EkBbW+It9R/NPz9lJztsH5cEiq8tRpDezX8LobizeULFd6P1+sdpesgZrxRIKcma+LtTocgTrxzNTxIiGrfJSfQi/cvn5W5yam0IOLFB6+3hshm514X/hucN8Af5X8PRgAAAABJRU5ErkJggg==" />GBP
-                            </li>
-                            <li onclick="setCurrency('CAD')"><img
-                                    src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAgCAMAAABjCgsuAAAAVFBMVEX/AAD/AwP/BQX/CQn/R0f/Skr/S0v/Tk7/cHD/cXH/hYX/lJT/q6v/r6//srL/t7f/xMT/zc3/zs7/z8//0ND/1dX/1tb/2Nj/29v/5ub/9/f////rrEQTAAAAbklEQVQ4y+3Ttw6AMAxF0QsJvRMI7f//kwExICFkjwje5uEMbnDJdhOe8oO3g7bVgSGKBxWwYOVgWasUsmpdhKAITAKJCQohqM+qFoIyPIqwlDbdGADTyKeUA+SKsXrXd86rNj3NytNw4/9AHwc7pig+ByeVQt0AAAAASUVORK5CYII=" />CAD
-                            </li>
-                        </ul>
-                    </div>
-
-                </li> --}}
-                <li id="translate" class="avijit"></li>
-
-            </ul>
+            
         </div>
         <div class="header-contact">
             <ul>
-                <li><a href="{{route('cart')}}"><i class="fa-regular fa-cart-shopping"></i>
-                        <div class="cart-num"> @if(Helper::cartCount()>0){{Helper::cartCount()}}@endif </div>
-                    </a></li>
                 <li class="account-login"> <a href="#" class="account-login-link"><i class="fa-regular fa-user"></i></a>
                     <div class="account-popup " style="z-index: 9999;"> @auth
                         @if(Auth::user()->role=='admin')

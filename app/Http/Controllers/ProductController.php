@@ -2,12 +2,6 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Product;
-use App\Models\Category;
-use App\Models\Faq;
-use App\Models\Brand;
-use App\Models\FlexAttribute;
-//use App\Models\Vendor;
-//use App\Models\ProductVendor;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
@@ -24,13 +18,12 @@ class ProductController extends Controller
 
      */
 
-    public function index(){   
-        // get FAQ ;
-        $faq=Faq::where('status','active')->orderBy('title','ASC')->get();
-        $products = Product::getAllProduct();
-        return view('backend.product.index')->with('products',$products)
-        ->with('faq_lists ',$faq);
+     public function index()
+    {   
+        $products = Product::where('status', 'active')->orderBy('title', 'ASC')->paginate(10); // Assuming 10 products per page
+        return view('backend.product.index', compact('products'));
     }
+
 
     /**
 
@@ -42,12 +35,9 @@ class ProductController extends Controller
 
      */
     public function create(){
-        //$vendor = Vendor::get()->where('status','active');
-        $brand = Brand::get()->where('status','active');
-        $category = Category::where('status','active')->orderBy('id','DESC')->get();
-        $flex_attribute = FlexAttribute::orderBy('id','DESC')->get();
+    
         // return $flex_attribute;
-        return view('backend.product.create',compact('flex_attribute'))->with('categories',$category)->with('brands',$brand);
+        return view('backend.product.create');
     }
     /**
 
@@ -61,87 +51,49 @@ class ProductController extends Controller
 
      */
 
-    public function store(Request $request){
-        $this->validate($request,[
-            'title'=>'string|required',
-            'rating'=>'required|numeric',
-            'no_of_product_sold'=>'required|numeric',
-            'summary'=>'string|required',
-            'description'=>'string|nullable',
-            'is_featured'=>'sometimes|in:1',
-            'is_cross_sell'=>'sometimes|in:1',
-            'cat_id'=>'required|exists:categories,id',
-            'child_cat_id'=>'nullable|exists:categories,id',
-            'price'=>'required|numeric',
-            'discount'=>'nullable|numeric',
-            'size'=>'nullable',
-
-            //'brand_id'=>'nullable|exists:brands,id',
-
-            //'vendors.*' => 'exists:vendors,id',
-
-            //'vendors' => 'required|array',
-
-            //'condition'=>'required|in:default,new,hot',
-
-            'stock'=>"required|numeric",
-            'status'=>'required|in:active,inactive',
-            'meta_title'=>'string|nullable',
-            'meta_keyword'=>'string|nullable',
-            'meta_description'=>'string|nullable',
-            'photo' => 'required',
+     public function store(Request $request)
+    {
+        $validatedData = $request->validate([
+            'title' => 'required|string',
+            'description' => 'nullable|string',
+            'price' => 'required|numeric',
+            'lock_days' => 'required',
+            'owner' => 'required',
+            'photo' => 'required|array',
             'photo.*' => 'mimes:jpg,png,jpeg,gif,svg'
         ]);
+        $imgLists = [];
+        foreach ($request->file('photo') as $file) {
+            $fileName = $file->getClientOriginalName();
+            $fileExtension = $file->extension();
+            $fileNewName = "product-" . rand(10, 999) . "." . $fileExtension;
 
-        $data = $request->all();
-        $slug = Str::slug($request->title);
-        $count = Product::where('slug',$slug)->count();
-        if($count>0){
-            $slug=$slug.'-'.date('ymdis').'-'.rand(0,999);
-        }
-
-        $data['slug']=$slug;
-        //$data['is_featured']=$request->input('is_featured',0);
-        $size = $request->input('size');
-        if($size){
-            $data['size'] = implode(',',$size);
-        }
-        else{
-            $data['size'] = '';
-        }
-        if($request->hasFile('photo')) {
-            foreach($request->file('photo') as $file)
-            {
-                $fileName       = $file->getClientOriginalName();
-                $file_extension = $file->extension();
-                $file_Newname   = "product-".rand(10, 999).".".$file_extension;
-
-                if($file->move('public/product/',$file_Newname)){
-                    $img_lists[] = $file_Newname;
-                } else {
-                    request()->session()->flash('error','Failed to upload document. Please try again after some time.');
-                }
+            if ($file->move('public/product/', $fileNewName)) {
+                $imgLists[] = $fileNewName;
+            } else {
+                return redirect()->back()->with('error', 'Failed to upload document. Please try again after some time.');
             }
-        $data['photo']= implode(", ",$img_lists);
-        } else {
-            request()->session()->flash('success','File not found');
         }
-        //$data['photo']=json_encode($img_lists);
 
+        try {
+            $product = new Product();
+            $product->title = $request->title;
+            $product->description = $request->description;
+            $product->price = $request->price;
+            $product->lock_days = $request->lock_days;
+            $product->owner = $request->owner;
+            $product->status = $request->status;
+            $product->photo = implode(", ", $imgLists);
+            $product->save();
         
-
-        $status = Product::create($data);
-        //$status->vendors()->attach($data['vendors']);
-
-        if($status){
-            request()->session()->flash('success','Product Successfully added');
+            return redirect()->route('product.index')->with('success', 'Product successfully added');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Failed to add product. Please try again later.');
         }
-        else{
-            request()->session()->flash('error','Please try again!!');
-        }
-        return redirect()->route('product.index');
     }
 
+     
+     
 
 
     /**
@@ -179,17 +131,9 @@ class ProductController extends Controller
      */
 
     public function edit($id){
-        $brand=Brand::get();
-        $product=Product::findOrFail($id);
-        $category=Category::where('status','active')->get();
-        $items=Product::where('id',$id)->get();
-        $flex_attribute = FlexAttribute::orderBy('id','DESC')->get();
-        // return $items;
-        return view('backend.product.edit',compact('flex_attribute'))->with('product',$product)
+       $product=Product::findOrFail($id);
+        return view('backend.product.edit',compact('product'));
 
-                    ->with('brands',$brand)
-
-                    ->with('categories',$category)->with('items',$items);
     }
 
 
@@ -207,83 +151,71 @@ class ProductController extends Controller
      * @return \Illuminate\Http\Response
 
      */
-    public function update(Request $request, $id){
-        $product=Product::findOrFail($id);
-        $this->validate($request,[
-            'title'=>'string|required',
-            'summary'=>'string|required',
-            'description'=>'string|nullable',
-            //'photo'=>'string|required',
-            'size'=>'nullable',
-            'stock'=>"required|numeric",
-            'cat_id'=>'required|exists:categories,id',
-            'child_cat_id'=>'nullable|exists:categories,id',
-            'is_featured'=>'sometimes|in:1',
-            'is_cross_sell'=>'sometimes|in:1',
-            'brand_id'=>'nullable|exists:brands,id',
-            'status'=>'required|in:active,inactive',
-           // 'condition'=>'required|in:default,new,hot',
-            'price'=>'required|numeric',
-            'discount'=>'nullable|numeric',
+    public function update(Request $request, $id)
+    {
+        // Find the product by ID
+        $product = Product::findOrFail($id);
+    
+        // Validate the request data
+        $this->validate($request, [
+            'title' => 'required|string',
+            'description' => 'nullable|string',
+            'price' => 'required|numeric',
+            'lock_days' => 'required',
+            'owner' => 'required',
+            'photo' => 'required|array',
+            'photo.*' => 'mimes:jpg,png,jpeg,gif,svg'
         ]);
-
-        $data=$request->all();
-        $data['is_featured']=$request->input('is_featured',0);
-        
-        $data['is_cross_sell']=$request->input('is_cross_sell',0);
-        
-        $size=$request->input('size');
-        if($size){
-            $data['size']=implode(',',$size);
-        }
-        else{
-            $data['size']='';
-        }
-
-        // if($request->hasFile('photo')) {
-        //     $file = $request->file('photo');
-        //     $fileName = $file->getClientOriginalName();
-        //     $file_extension = $file->extension();
-        //     $file_size = $file->getSize();
-        //     $file_Newname = $fileName.rand(10, 100).".".$file_extension;
-        //     if($file->move('public/product/',$file_Newname)){
-        //     $data['photo'] = $file_Newname;
-        //     } else {
-        //     request()->session()->flash('error','Failed to upload document. Please try again after some time.');
-        //     }
-        // } else {
-        //     request()->session()->flash('success','File not found');
-        // }
-
-        if($request->hasFile('photo')) {
-            foreach($request->file('photo') as $file)
-            {
-                $fileName       = $file->getClientOriginalName();
+    
+        // Initialize an empty array to store image filenames
+        $img_lists = [];
+    
+        // Process the 'is_featured' and 'is_cross_sell' fields if present in the request
+        $data = $request->all();
+    
+        // Process the 'size' field
+        $size = $request->input('size');
+        $data['size'] = $size ? implode(',', $size) : '';
+    
+        // Check if there are uploaded files in the 'photo' field
+        if ($request->hasFile('photo')) {
+            // Process each uploaded file
+            foreach ($request->file('photo') as $file) {
+                // Generate a new filename for the image
+                $fileName = $file->getClientOriginalName();
                 $file_extension = $file->extension();
-                $file_Newname   = "product-".rand(10, 999).".".$file_extension;
-
-                if($file->move('public/product/',$file_Newname)){
+                $file_Newname = "product-" . rand(10, 999) . "." . $file_extension;
+    
+                // Move the uploaded file to the 'public/product/' directory
+                if ($file->move('public/product/', $file_Newname)) {
+                    // Store the filename in the array
                     $img_lists[] = $file_Newname;
                 } else {
-                    request()->session()->flash('error','Failed to upload document. Please try again after some time.');
+                    // Display an error message if file upload fails
+                    request()->session()->flash('error', 'Failed to upload document. Please try again after some time.');
                 }
             }
-            $data['photo']= implode(",",$img_lists);
+            // Update the 'photo' field with a comma-separated list of image filenames
+            $data['photo'] = implode(",", $img_lists);
         } else {
-            request()->session()->flash('success','File not found');
+            // Display a success message if no files are found
+            request()->session()->flash('success', 'File not found');
         }
-
-        $data['summary'] = addslashes($request->input('summary'));
-        // return $data;
-        $status=$product->fill($data)->save();
-        if($status){
-            request()->session()->flash('success','Product Successfully updated');
+    
+        // Attempt to update the product with the new data
+        $status = $product->fill($data)->save();
+    
+        // Display success or error messages based on the update status
+        if ($status) {
+            request()->session()->flash('success', 'Product Successfully updated');
+        } else {
+            request()->session()->flash('error', 'Please try again!!');
         }
-        else{
-            request()->session()->flash('error','Please try again!!');
-        }
+    
+        // Redirect back to the product index page
         return redirect()->route('product.index');
     }
+    
 
     /**
 

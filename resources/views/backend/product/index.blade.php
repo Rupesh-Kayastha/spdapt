@@ -20,10 +20,8 @@
               <th>S.N.</th>
               <th>Photo</th>
               <th>Title</th>
-              <th>Category</th>
               <th>Price</th>
-              <th>Size</th>
-              <th>Stock</th>
+              <th>Owner</th>
               <th>Status</th>
               <th>Action</th>
             </tr>
@@ -33,32 +31,20 @@
               <th>S.N.</th>
               <th>Photo</th>
               <th>Title</th>
-              <th>Category</th>
               <th>Price</th>
-              <th>Size</th>
-              <th>Stock</th>
+              <th>Owner</th>
               <th>Status</th>
               <th>Action</th>
             </tr>
           </tfoot>
           <tbody> 
             @foreach($products as $product)
-              @php
-              $sub_cat_info=DB::table('categories')->select('title')->where('id',$product->child_cat_id)->get();
-              // dd($sub_cat_info);
-              $brands=DB::table('brands')->select('title')->where('id',$product->brand_id)->get();
-              // $vendorNames = $product->vendors()->pluck('name');
-              // $vname=collect($vendorNames)->all();
-              // $vname = implode(",",$vname);
-              @endphp
                 <tr>               
                     <td>{{$product->id}}</td>
                     <td>
                       @if($product->photo)
                           @php
                             $photo=explode(',',$product->photo);
-                          //echo '<pre>';
-                          //print_r($photo);
                           @endphp
 
                          
@@ -70,23 +56,9 @@
                           <img src="{{asset('backend/img/thumbnail-default.jpg')}}" class="img-fluid" style="max-width:80px" alt="avatar.png">
                       @endif
                   </td>
-                    <td><a href="{{url('/')}}/shop/{{$product->slug}}" target="_blank">{{$product->title}}</a></td>
-                      <sub>
-                          {{$product->sub_cat_info->title ?? ''}}
-                      </sub>
-                    </td>
-                    <td>{{(($product->is_featured==1)? 'Yes': 'No')}}</td>
+                    <td>{{$product->title}}</td>
                     <td>{{number_format($product->price,2)}}/-</td>
-                    {{-- <td>{{$product->discount}}% OFF</td> --}}
-                    <td>{{$product->size}}</td>
-                    {{-- <td>{{ isset(($product->brand->title)) ? ucfirst($product->brand->title) : " " }}</td> --}}
-                    <td>
-                      @if($product->stock>0)
-                      <span class="badge badge-primary">{{$product->stock}}</span>
-                      @else
-                      <span class="badge badge-danger">{{$product->stock}}</span>
-                      @endif
-                    </td>
+                    <td>{{$product->owner}}</td>
                     <td>
                         @if($product->status=='active')
                             <span class="badge badge-success">{{$product->status}}</span>
@@ -95,13 +67,11 @@
                         @endif
                     </td>
                     <td>
-                    <a href="{{url('/')}}/shop/{{$product->slug}}" title="view" target="_blank"><i class="fas fa-eye" style="width:20px"></i></a>
-                    
+                       
                         <a href="{{route('product.edit',$product->id)}}" title="edit" data-placement="bottom"><i style="width:20px" class="fas fa-edit"></i></a>
-                        
-                    <form method="POST" id="delete_form" action="{{route('product.destroy',[$product->id])}}" onsubmit="confirm_to_delete()">
-                      @csrf
-                      @method('delete')
+                        <form method="POST" id="delete_form" action="{{route('product.destroy',[$product->id])}}" onsubmit="confirm_to_delete()">
+                          @csrf
+                          @method('delete')
                           <button class="btn btn-danger btn-sm dltBtn" data-id={{$product->id}} style="height:30px; width:30px;border-radius:50%" data-toggle="tooltip" data-placement="bottom" title="Delete"><i class="fas fa-trash-alt"></i></button>
                         </form>
                     </td>
@@ -110,6 +80,7 @@
           </tbody>
         </table>
         <span style="float:right">{{$products->links()}}</span>
+
         @else
           <h6 class="text-center">No Products found!!! Please create Product</h6>
         @endif
@@ -142,17 +113,17 @@
   <script>
       $('#product-dataTable').DataTable( {
         "order": [[0, "desc"]],
-        "scrollX": false
-            "columnDefs":[
-                {
-                    "orderable":false,
-                    "targets":[10,11,12]
-                }
-            ]
-        } );
-        // Sweet alert
-        function deleteData(id){
-        }
+        "scrollX": false,
+        "columnDefs":[
+            {
+                "orderable":false,
+                "targets":[6]
+            }
+        ]
+      });
+      // Sweet alert
+      function deleteData(id){
+      }
   </script>
   <script>
       $(document).ready(function(){
@@ -195,4 +166,3 @@
     }
     </script>
 @endpush
-
