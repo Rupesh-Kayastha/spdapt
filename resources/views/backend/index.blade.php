@@ -11,17 +11,17 @@
     <!-- Content Row -->
     <div class="row">
 
-      <!-- Category -->
-      <div class="col-xl-3 col-md-6 mb-4">
+      <!-- Users -->
+      <div class="col-xl-4 col-md-6 mb-4">
         <div class="card border-left-primary shadow h-100 py-2">
           <div class="card-body">
             <div class="row no-gutters align-items-center">
               <div class="col mr-2">
-                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Category</div>
-                <div class="h5 mb-0 font-weight-bold text-gray-800">{{\App\Models\Category::countActiveCategory()}}</div>
+                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Users</div>
+                <div class="h5 mb-0 font-weight-bold text-gray-800">{{Helper::countActiveUser()}}</div>
               </div>
               <div class="col-auto">
-                <i class="fas fa-sitemap fa-2x text-gray-300"></i>
+                <i class="fas fa fa-users fa-2x text-gray-300"></i>
               </div>
             </div>
           </div>
@@ -29,7 +29,7 @@
       </div>
 
       <!-- Products -->
-      <div class="col-xl-3 col-md-6 mb-4">
+      <div class="col-xl-4 col-md-6 mb-4">
         <div class="card border-left-success shadow h-100 py-2">
           <div class="card-body">
             <div class="row no-gutters align-items-center">
@@ -46,7 +46,7 @@
       </div>
 
       <!-- Order -->
-      <div class="col-xl-3 col-md-6 mb-4">
+      <div class="col-xl-4 col-md-6 mb-4">
         <div class="card border-left-info shadow h-100 py-2">
           <div class="card-body">
             <div class="row no-gutters align-items-center">
@@ -67,22 +67,58 @@
         </div>
       </div>
 
-      <!--Posts-->
-      <div class="col-xl-3 col-md-6 mb-4">
+      <!--Recharge-->
+      <div class="col-xl-4 col-md-6 mb-4">
         <div class="card border-left-warning shadow h-100 py-2">
           <div class="card-body">
             <div class="row no-gutters align-items-center">
               <div class="col mr-2">
-                <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Post</div>
-                <div class="h5 mb-0 font-weight-bold text-gray-800">{{\App\Models\Post::countActivePost()}}</div>
+                <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Recharge</div>
+                <div class="h5 mb-0 font-weight-bold text-gray-800">{{number_format(\App\Models\Transaction::countRecharge(),2)}}</div>
               </div>
               <div class="col-auto">
-                <i class="fas fa-folder fa-2x text-gray-300"></i>
+                <i class="fas fa-rupee-sign fa-2x text-gray-300"></i>
               </div>
             </div>
           </div>
         </div>
       </div>
+
+      <!--Withdrawal-->
+      <div class="col-xl-4 col-md-6 mb-4">
+        <div class="card border-left-dark shadow h-100 py-2">
+          <div class="card-body">
+            <div class="row no-gutters align-items-center">
+              <div class="col mr-2">
+                <div class="text-xs font-weight-bold text-dark text-uppercase mb-1">Withdrawal</div>
+                <div class="h5 mb-0 font-weight-bold text-gray-800">{{number_format(\App\Models\Transaction::countRecharge(),2)}}</div>
+              </div>
+              <div class="col-auto">
+                <i class="fas fa-money-bill fa-2x text-gray-300"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!--whatsapp-->
+      <div class="col-xl-4 col-md-6 mb-4">
+        <div class="card border-left-danger shadow h-100 py-2">
+          <div class="card-body">
+            <div class="row no-gutters align-items-center">
+              <div class="col mr-2">
+                <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">Income</div>
+                <div class="h5 mb-0 font-weight-bold text-gray-800">{{number_format(\App\Models\Transaction::countIncome(),2)}}</div>
+              </div>
+              <div class="col-auto">
+                <i class="fas fa-sitemap fa-2x text-gray-300"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      
     </div>
     <div class="row">
 

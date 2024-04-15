@@ -12,4 +12,28 @@ class Transaction extends Model
     public function user_info(){
         return $this->hasOne('App\User','id','user_id');
     }
+
+    public static function countRecharge(){
+        $data=Transaction::where(["type" => 'CR', 'status' => "1"])->sum("amount");
+        if($data){
+            return $data;
+        }
+        return 0;
+    }
+
+    public static function countWithdrawal(){
+        $data=Transaction::where(["type" => 'DR', 'status' => "1"])->sum("amount");
+        if($data){
+            return $data;
+        }
+        return 0;
+    }
+
+    public static function countIncome(){
+        $data=Transaction::where(["type" => 'IC', 'status' => "1"])->sum("amount");
+        if($data){
+            return $data;
+        }
+        return 0;
+    }
 }

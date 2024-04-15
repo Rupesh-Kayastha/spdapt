@@ -1,3 +1,7 @@
+@php
+$settings=DB::table('settings')->get();
+@endphp
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -19,7 +23,7 @@
               <div class="col-lg-6 text-left">
                 <div class="p-5">
                   <div class="text-center">
-                    <h1 class="h4 text-gray-900 mb-4"><img src="https://morshgolf.com/wp-content/uploads/2020/01/morsh-golf-logo-est.png" alt="Admin Logo" title="morshgolf"></h1>
+                    <h1 class="h4 text-gray-900 mb-4"><img src="@foreach($settings as $data) {{ url('/public/product/') }}/{{$data->logo}} @endforeach" alt="Admin Logo" height="100" width="100" title="SPDAPT"></h1>
                   </div>
                   <form class="user"  method="POST" action="{{ route('login') }}">
                     @csrf

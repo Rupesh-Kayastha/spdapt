@@ -309,6 +309,11 @@ class Helper{
         return $user;
     }
 
+    public static function countActiveUser(){
+        $countActiveUser = DB::table('users')->count();
+        return $countActiveUser;
+    }
+
 }
 
 ?>

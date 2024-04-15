@@ -83,6 +83,19 @@ class AdminController extends Controller
         $data=$request->all();
         $settings=Settings::first();
 
+        if($request->hasFile('logo')) {
+            $file = $request->file('logo');
+            $fileName = $file->getClientOriginalName();
+            $file_extension = $file->extension();
+            $file_size = $file->getSize();
+            $file_Newname = "logo-" . time() . "." . $file_extension;
+            if($file->move('public/product/',$file_Newname)){
+                $data['logo']= $file_Newname;
+            } else {
+                throw new \Exception("Failed to upload document. Please try again after some time.");
+            }
+        }
+
         if($request->hasFile('home_banner1')) {
             $file = $request->file('home_banner1');
             $fileName = $file->getClientOriginalName();

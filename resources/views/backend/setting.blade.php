@@ -17,10 +17,10 @@
                 <i class="fa fa-picture-o"></i> Choose
               </a>
             </span>
-            <input id="thumbnail1" class="form-control" type="text" name="logo" value="{{$data->logo}}">
+            <input id="thumbnail1" class="form-control" type="file" name="logo" value="{{$data->logo}}">
           </div>
           <br>
-          <img src="{{$data->logo}}" style="background: #141414;">
+          <img src="{{ url('/public/product/') }}/{{$data->logo}}" height="100" width="100" style="background: #141414;">
           <div id="holder1" style="margin-top:15px;max-height:100px;"></div>
           @error('logo')
           <span class="text-danger">{{$message}}</span>

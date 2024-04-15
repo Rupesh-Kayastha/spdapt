@@ -102,7 +102,7 @@
 
   <div class="footer-copyright">
 
-      <p>© {{ date('Y') }} MorshGolf | Development: <a href="https://www.polosoftech.com/" target="_blank">Polosoftech</a></p>
+      <p>© {{ date('Y') }} SPDAPT | Development: Rupesh Kayastha</a></p>
 
       <div class="footer-payment">
 
