@@ -1,5 +1,5 @@
 @extends('backend.layouts.master')
-@section('title','Morsh Golf 2 Wood || DASHBOARD')
+@section('title','SPDAPT || DASHBOARD')
 @section('main-content')
 <div class="container-fluid">
     @include('backend.layouts.notification')

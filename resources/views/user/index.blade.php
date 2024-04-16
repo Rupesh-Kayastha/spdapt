@@ -117,83 +117,115 @@
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
     </div>
-    
-    <!-- Content Row --> 
-    
-    {{--
-    <div class="row"> 
-        
-        <!-- Category -->
-        
-        <div class="col-xl-3 col-md-6 mb-4">
-            <div class="card border-left-primary shadow h-100 py-2">
-                <div class="card-body">
-                    <div class="row no-gutters align-items-center">
-                        <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Category</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{\App\Models\Category::countActiveCategory()}}</div>
-                        </div>
-                        <div class="col-auto"> <i class="fas fa-sitemap fa-2x text-gray-300"></i> </div>
-                    </div>
-                </div>
+
+    <div class="row">
+      <!--Recharge-->
+      <div class="col-xl-4 col-md-6 mb-4">
+        <div class="card border-left-warning shadow h-100 py-2">
+          <div class="card-body">
+            <div class="row no-gutters align-items-center">
+              <div class="col mr-2">
+                <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Recharge</div>
+                <div class="h5 mb-0 font-weight-bold text-gray-800">{{number_format(\App\Models\Transaction::countUserRecharge(),2)}}</div>
+              </div>
+              <div class="col-auto">
+                <i class="fas fa-rupee-sign fa-2x text-gray-300"></i>
+              </div>
             </div>
+          </div>
         </div>
-        
-        <!-- Products -->
-        
-        <div class="col-xl-3 col-md-6 mb-4">
-            <div class="card border-left-success shadow h-100 py-2">
-                <div class="card-body">
-                    <div class="row no-gutters align-items-center">
-                        <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Products</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{\App\Models\Product::countActiveProduct()}}</div>
-                        </div>
-                        <div class="col-auto"> <i class="fas fa-cubes fa-2x text-gray-300"></i> </div>
-                    </div>
-                </div>
+      </div>
+
+      <!--Withdrawal-->
+      <div class="col-xl-4 col-md-6 mb-4">
+        <div class="card border-left-dark shadow h-100 py-2">
+          <div class="card-body">
+            <div class="row no-gutters align-items-center">
+              <div class="col mr-2">
+                <div class="text-xs font-weight-bold text-dark text-uppercase mb-1">Withdrawal</div>
+                <div class="h5 mb-0 font-weight-bold text-gray-800">{{number_format(\App\Models\Transaction::countUserWithdrawal(),2)}}</div>
+              </div>
+              <div class="col-auto">
+                <i class="fas fa-money-bill fa-2x text-gray-300"></i>
+              </div>
             </div>
+          </div>
         </div>
-        
-        <!-- Order -->
-        
-        <div class="col-xl-3 col-md-6 mb-4">
-            <div class="card border-left-info shadow h-100 py-2">
-                <div class="card-body">
-                    <div class="row no-gutters align-items-center">
-                        <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Order</div>
-                            <div class="row no-gutters align-items-center">
-                                <div class="col-auto">
-                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">{{\App\Models\Order::countActiveOrder()}}</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-auto"> <i class="fas fa-clipboard-list fa-2x text-gray-300"></i> </div>
-                    </div>
-                </div>
+      </div>
+
+      <!--income-->
+      <div class="col-xl-4 col-md-6 mb-4">
+        <div class="card border-left-danger shadow h-100 py-2">
+          <div class="card-body">
+            <div class="row no-gutters align-items-center">
+              <div class="col mr-2">
+                <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">Income</div>
+                <div class="h5 mb-0 font-weight-bold text-gray-800">{{number_format(\App\Models\Transaction::countUserIncome(),2)}}</div>
+              </div>
+              <div class="col-auto">
+                <i class="fas fa-sitemap fa-2x text-gray-300"></i>
+              </div>
             </div>
+          </div>
         </div>
-        
-        <!--Posts-->
-        
-        <div class="col-xl-3 col-md-6 mb-4">
-            <div class="card border-left-warning shadow h-100 py-2">
-                <div class="card-body">
-                    <div class="row no-gutters align-items-center">
-                        <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Post</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{\App\Models\Post::countActivePost()}}</div>
-                        </div>
-                        <div class="col-auto"> <i class="fas fa-folder fa-2x text-gray-300"></i> </div>
-                    </div>
+      </div>
+
+      <!-- Order -->
+      <div class="col-xl-4 col-md-6 mb-4">
+        <div class="card border-left-info shadow h-100 py-2">
+          <div class="card-body">
+            <div class="row no-gutters align-items-center">
+              <div class="col mr-2">
+                <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Order</div>
+                <div class="row no-gutters align-items-center">
+                  <div class="col-auto">
+                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">{{\App\Models\Order::countUserOrder()}}</div>
+                  </div>
+                  
                 </div>
+              </div>
+              <div class="col-auto">
+                <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+              </div>
             </div>
+          </div>
         </div>
+      </div>
+
+      <!-- whatsapp -->
+      <div class="col-xl-4 col-md-6 mb-4">
+        <div class="card border-left-primary shadow h-100 py-2">
+          <div class="card-body">
+            <div class="row no-gutters align-items-center">
+              <div class="col mr-2">
+                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Whatsapp</div>
+                <div class="h5 mb-0 font-weight-bold text-gray-800">7205022110</div>
+              </div>
+              <div class="col-auto">
+                <i class="fas fa-comments fa-2x text-gray-300" aria-hidden="true"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Products -->
+      <div class="col-xl-4 col-md-6 mb-4">
+        <div class="card border-left-success shadow h-100 py-2">
+          <div class="card-body">
+            <div class="row no-gutters align-items-center">
+              <div class="col mr-2">
+                <div class="text-xs font-weight-bold text-success text-uppercase mb-1">REFERRAL CODE</div>
+                <div class="h5 mb-0 font-weight-bold text-gray-800"></div>
+              </div>
+              <div class="col-auto">
+                <i class="fas fa-cubes fa-2x text-gray-300"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>       
     </div>
-    --}} 
-    
-    <!-- Content Row -->
     
     <div class="user-product-list-sec"> @php
         $orders=DB::table('orders')->where('user_id',auth()->user()->id)->orderBy('id','DESC')->paginate(10);
@@ -242,7 +274,7 @@
                           <div class="cart-p-footer">
 													<div class="cart-p-price">
 														@if($res_cart_prod->is_cross_sell=='1')
-														Price : $ <strike class="text-danger">{{number_format($res_cart_prod->price,2)}}</strike> $0.00 @else Price : ${{number_format($res_cart_prod->price,2)}}
+														Price : <strike class="text-danger">{{number_format($res_cart_prod->price,2)}}</strike> 0.00 @else Price : ${{number_format($res_cart_prod->price,2)}}
 														@endif
 													</div>
                           <span type="text"><strong>Qnt.:</strong> {{$res_cart_prod->quantity}}	</span>
@@ -250,9 +282,9 @@
 											</div>
 													<div class="cart-p-subtotal total-amount cart_single_price money" data-title="Total">Subtotal 
 															@if($res_cart_prod->is_cross_sell=='1')
-																	<span>$0.00</span>
+																	<span>0.00</span>
 															@else
-																	<span>${{number_format($res_cart_prod->amount,2)}}</span>
+																	<span>{{number_format($res_cart_prod->amount,2)}}</span>
 															@endif
 													</div>
 											</div>
@@ -265,7 +297,7 @@
                     
                   
 
-                    <div class="p-list-name"><span>Total Amount : </span>  	${{number_format($order->total_amount,2)}}</div>
+                    <div class="p-list-name"><span>Total Amount : </span>  	{{number_format($order->total_amount,2)}}</div>
                     <div class="user-product-bottom">
                     <div class="status"> Status @if($order->status=='new') <span class="badge badge-primary">{{$order->status}}</span> @elseif($order->status=='process') <span class="badge badge-warning">{{$order->status}}</span> @elseif($order->status=='delivered') <span class="badge badge-success">{{$order->status}}</span> @else <span class="badge badge-danger">{{$order->status}}</span> @endif </div>
                     

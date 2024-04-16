@@ -36,4 +36,13 @@ class Order extends Model
         return $this->belongsTo('App\User', 'user_id');
     }
 
+    public static function countUserOrder(){
+        $userId = auth()->id();
+        $data=Order::where("user_id", $userId)->count();
+        if($data){
+            return $data;
+        }
+        return 0;
+    }
+
 }

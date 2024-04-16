@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Models;
-
+use Auth;
 use Illuminate\Database\Eloquent\Model;
 
 class Transaction extends Model
@@ -14,7 +14,7 @@ class Transaction extends Model
     }
 
     public static function countRecharge(){
-        $data=Transaction::where(["type" => 'CR', 'status' => "1"])->sum("amount");
+        $data=Transaction::where(["type" => 'CR', "status" => '1'])->sum("amount");
         if($data){
             return $data;
         }
@@ -22,7 +22,7 @@ class Transaction extends Model
     }
 
     public static function countWithdrawal(){
-        $data=Transaction::where(["type" => 'DR', 'status' => "1"])->sum("amount");
+        $data=Transaction::where(["type" => 'DR', "status" => '1'])->sum("amount");
         if($data){
             return $data;
         }
@@ -30,10 +30,37 @@ class Transaction extends Model
     }
 
     public static function countIncome(){
-        $data=Transaction::where(["type" => 'IC', 'status' => "1"])->sum("amount");
+        $data=Transaction::where(["type" => 'IC', "status" => '1'])->sum("amount");
         if($data){
             return $data;
         }
+        return 0;
+    }
+
+    public static function countUserRecharge(){
+        $userId = auth()->id();        
+        if($userId){
+            $data = Transaction::where(["type" => 'CR', "status" => '1', "user_id" => $userId])->sum("amount");            
+            return $data ?? 0;
+        }        
+        return 0;
+    }
+
+    public static function countUserWithdrawal(){
+        $userId = auth()->id();        
+        if($userId){
+            $data = Transaction::where(["type" => 'DR', "status" => '1', "user_id" => $userId])->sum("amount");            
+            return $data ?? 0;
+        }        
+        return 0;
+    }
+
+    public static function countUserIncome(){
+        $userId = auth()->id();        
+        if($userId){
+            $data = Transaction::where(["type" => 'IC', "status" => '1', "user_id" => $userId])->sum("amount");            
+            return $data ?? 0;
+        }        
         return 0;
     }
 }
