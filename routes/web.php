@@ -349,20 +349,6 @@ Route::group(['prefix'=>'/user','middleware'=>['user']],function(){
     Route::get('/order/show/{id}',"HomeController@orderShow")->name('user.order.show');
     Route::delete('/order/delete/{id}','HomeController@userOrderDelete')->name('user.order.delete');
 
-    // Product Review
-    // Route::get('/user-review','HomeController@productReviewIndex')->name('user.productreview.index');
-    // Route::delete('/user-review/delete/{id}','HomeController@productReviewDelete')->name('user.productreview.delete');
-    // Route::get('/user-review/edit/{id}','HomeController@productReviewEdit')->name('user.productreview.edit');
-    // Route::patch('/user-review/update/{id}','HomeController@productReviewUpdate')->name('user.productreview.update');
-
-    
-    // Post comment
-    // Route::get('user-post/comment','HomeController@userComment')->name('user.post-comment.index');
-    // Route::delete('user-post/comment/delete/{id}','HomeController@userCommentDelete')->name('user.post-comment.delete');
-    // Route::get('user-post/comment/edit/{id}','HomeController@userCommentEdit')->name('user.post-comment.edit');
-    // Route::patch('user-post/comment/udpate/{id}','HomeController@userCommentUpdate')->name('user.post-comment.update');
-
-
     //Recharge
     Route::get('recharge/index','RechargeController@userRecharge')->name('user.recharge.index');
     Route::get('recharge/create','RechargeController@userRechargecreate')->name('user.recharge.create');

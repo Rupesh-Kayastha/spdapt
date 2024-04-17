@@ -44,5 +44,8 @@ class Order extends Model
         }
         return 0;
     }
+    public function user_info(){
+        return $this->hasOne('App\User','id','user_id');
+    }
 
 }
