@@ -51,9 +51,9 @@
 
   <!-- Reviews -->
   <li class="nav-item">
-    <a class="nav-link" href="{{route('user.productreview.index')}}">
-      <i class="fas fa-comments"></i>
-      <span>Reviews</span></a>
+    <a class="nav-link" href="{{route('user.recharge.index')}}">
+      <i class="	fa fa-credit-card"></i>
+      <span>Recharge</span></a>
   </li>
 
 
@@ -61,14 +61,14 @@
   <hr class="sidebar-divider">
 
   <!-- Heading -->
-  <div class="sidebar-heading">
+  {{-- <div class="sidebar-heading">
     Posts
-  </div>
+  </div> --}}
   <!-- Comments -->
   <li class="nav-item">
-    <a class="nav-link" href="{{route('user.post-comment.index')}}">
-      <i class="fas fa-comments fa-chart-area"></i>
-      <span>Comments</span>
+    <a class="nav-link" href="{{route('user.withdrawal.index')}}">
+      <i class="fa-solid fa-coins"></i>
+      <span>withdrawal</span>
     </a>
   </li>
   <!-- Sidebar Toggler (Sidebar) -->
