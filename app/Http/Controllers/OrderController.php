@@ -35,7 +35,7 @@ class OrderController extends Controller
      */
 
     public function index(){
-        $orders=Order::with('product')->orderBy('id','DESC')->paginate(10);
+        $orders=Order::with('product')->with('user')->orderBy('id','DESC')->paginate(10);
         return view('backend.order.index')->with('orders',$orders);
     }
 

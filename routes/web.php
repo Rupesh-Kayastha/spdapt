@@ -37,6 +37,8 @@ Route::post('user/login','FrontendController@loginSubmit')->name('login.submit')
 Route::get('user/logout','FrontendController@logout')->name('user.logout');
 Route::get('user/register','FrontendController@register')->name('register.form');
 Route::post('user/register','FrontendController@registerSubmit')->name('register.submit');
+Route::post('user/referralcode','FrontendController@registerReferralcode')->name('register.referralcode');
+Route::get('referralcode','FrontendController@referralcode')->name('referralcode');
 
 // Reset password
 Route::get('password-reset', 'FrontendController@showResetForm')->name('password.reset'); 

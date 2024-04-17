@@ -54,7 +54,7 @@
                                 <tr>
                                     <td>{{ $order->id }}</td>
                                     <td>{{ $order->order_number }}</td>
-                                    <td>{{ $order->first_name }} {{ $order->last_name }}</td>
+                                    <td>{{ $order->user->name }}</td>
                                     <td>{{ $order->product->title }}</td>
                                     <td>{{ date('d-m-Y', strtotime($order->created_at)) }}</td>
                                     <td>{{ number_format($order->total_amount, 2) }}</td>

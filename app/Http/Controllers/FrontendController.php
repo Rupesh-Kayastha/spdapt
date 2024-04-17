@@ -453,6 +453,10 @@ class FrontendController extends Controller
         return view('frontend.pages.register');
     }
 
+    public function referralcode(){
+        return view('frontend.referralcode');
+    }
+
     public function registerSubmit(Request $request){
 
         // return $request->all();
@@ -463,18 +467,17 @@ class FrontendController extends Controller
 
         ]);
         $data = $request->all();
-        // dd($data);
         $check = $this->create($data);
         Session::put('user', $data['email']);
         $datais = [
             'name' => $request->name,
             'to' => $request->email,
-            'subject' => "Sign up successful. On " . date('Y-m-d H:i:sA') . " || Morshgolf"
+            'subject' => "Sign up successful. On " . date('Y-m-d H:i:sA') . " || SPDAPT"
         ];
-        Mail::send('mail.signup',$datais, function($messages) use ($datais){
-            $messages->to($datais['to']);
-            $messages->subject($datais['subject']);
-        });
+        // Mail::send('mail.signup',$datais, function($messages) use ($datais){
+        //     $messages->to($datais['to']);
+        //     $messages->subject($datais['subject']);
+        // });
 
         if ($check) {
             request()->session()->flash('success', 'Successfully registered');
@@ -485,10 +488,61 @@ class FrontendController extends Controller
         }
     }
 
+    public function registerReferralcode(Request $request){
+        $this->validate($request, [
+            'name' => 'string|required|min:2',
+            'email' => 'string|required|unique:users,email',
+            'password' => 'required|min:6|confirmed',
+            'phone_no' => 'required|min:10',
+            'referralcode' => 'required',
+
+        ]);
+        $data = $request->all();
+        // $check = $this->create($data);
+        $check = "rupesh";
+        Session::put('user', $data['email']);
+        $datais = [
+            'name' => $request->name,
+            'to' => $request->email,
+            'subject' => "Sign up successful. On " . date('Y-m-d H:i:sA') . " || SPDAPT"
+        ];
+        // Mail::send('mail.signup',$datais, function($messages) use ($datais){
+        //     $messages->to($datais['to']);
+        //     $messages->subject($datais['subject']);
+        // });
+
+        if ($check) {
+            $level1Data = DB::table('users')->where('phone_no', $data['referralcode'])->first();
+            $level2Data = Brand::where("userid", $level1Data->id)->first();
+            $level3Data = Brand::where("userid", $level2Data->level2)->first();
+
+            dd($level2Data);
+
+            $brand = New Brand;
+            $brand->userid = $check->id;
+            $brand->level1 = $level1Data->id;
+            $brand->level2 = $level2Data->level1;
+            $brand->level3 = $level3Data->level2;
+            $brandsave = $brand->save();
+
+            if($brandsave){
+                request()->session()->flash('success', 'Successfully registered');
+                return redirect()->route('login.form');
+            } else {
+                request()->session()->flash('error', 'Please try again!');
+                return back(); 
+            }
+        } else {
+            request()->session()->flash('error', 'Please try again!');
+            return back();
+        }
+    }
+
     public function create(array $data){
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
+            'phone_no' => $data['phone_no'],
             'password' => Hash::make($data['password']),
             'status' => 'active'
         ]);
