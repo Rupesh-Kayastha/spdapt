@@ -54,6 +54,7 @@
 <script src="{{ asset('frontend/js/slick-lightbox.min.js') }}"></script>
 <script src="{{ asset('frontend/js/slick.js') }}"></script>
 <script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.6/js/jquery.dataTables.js"></script>
 <script src="{{ asset('frontend/js/script.js') }}"></script>
 <script>
     new WOW().init(); 
@@ -453,6 +454,7 @@
             offerClass = true;
         });   
 	});
+    
 
 </script>
 <style>

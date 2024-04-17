@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Transaction extends Model
 {
     protected $table = 'transaction';
+    protected $dates = ['date'];
     protected $fillable=['user_id','amount','payon','payment_id','status','type','purpose','date'];
 
     public function user_info(){
