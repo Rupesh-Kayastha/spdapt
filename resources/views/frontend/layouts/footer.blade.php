@@ -7,8 +7,8 @@
                     <h3>INFORMATION</h3>
                     <ul>
                         <li><a href="{{ route('about-us') }}">About Us</a></li>
-                        <li><a href="{{ route('story') }}">Our Story</a></li>
-                        <li><a href="{{ route('delivery-information') }}">Delivery information</a></li>
+                        {{-- <li><a href="{{ route('story') }}">Our Story</a></li> --}}
+                        {{-- <li><a href="{{ route('delivery-information') }}">Delivery information</a></li> --}}
                         <li><a href="{{ route('privacy') }}">Privacy policy</a></li>
                         <li><a href="{{ route('terms') }}">Terms & conditions</a></li>
                     </ul>
@@ -21,13 +21,13 @@
                         {{-- <li><a href="{{ route('returns') }}">Returns</a></li> --}}
                     </ul>
                 </div>
-                <div class="footer-menu-list">
+                {{-- <div class="footer-menu-list">
                     <h3>EXTRAS</h3>
                     <ul>
                         <li><a href="{{ route('affiliates') }}">Affiliates</a></li>
                         <li><a href="{{ route('partners') }}">Partners</a></li>
                     </ul>
-                </div>
+                </div> --}}
             </div>
             <div class="about-footer">
                 <h3>ABOUT US</h3>
